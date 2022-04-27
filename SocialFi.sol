@@ -891,7 +891,7 @@ library SocialFiLib {
     function __SocialFi_init_unchained(SocialFiStru storage $) external {
         $.index                       = 1e18;
         mapping (bytes32 => uint) storage config = Config.config();
-        config[$C._minSignatures_   ] = 1;
+        config[$C._minSignatures_   ] = 3;
         config[$C._minAirClaim_     ] = 9999;
         config[$C._maxAirClaim_     ] = 1_000_000;
         config[$C._spanAirClaim_    ] = 20 days;
@@ -900,7 +900,7 @@ library SocialFiLib {
         config[$C._factorProfitDonate_] = 100;
         config[$C._factorQuota_     ] = 100;
         config[$C._factorMoreForce_ ] = 0.5e18;
-        config[$C._unlockBegin_     ] = now.add(1 days);
+        config[$C._unlockBegin_     ] = now.add(10 days);
         config[$C._lockSpanAirClaim_] = 100 days;
         config[$C._lockSpanDonate_  ] = 5 days;
         config[$C._spanDonateBuf_   ] = 5 days;
@@ -912,19 +912,20 @@ library SocialFiLib {
         config[$C._swapRouter_      ] = uint(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
         config[$C._swapFactory_     ] = uint(0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f);
         config[$C._discount_        ] = 0.10e18;        // 10%
-        config[$C._rebaseTime_      ] = now.add(1 days).add(8 hours).sub(now % 8 hours);
+        config[$C._rebaseTime_      ] = now.add(10 days).add(8 hours).sub(now % 8 hours);
         config[$C._rebasePeriod_    ] = 8 hours;
         config[$C._rebaseSpan_      ] = 20*365 days;
         config[$C._lpTknMaxRatio_   ] = 0.10e18;        // 10%
         config[$C._lpCurMaxRatio_   ] = 0.50e18;        // 50%
         config[$C._buybackRatio_    ] = 0.10e18;        // 10%
-        config[$C._allowClaimReward_] = 0;
+        //config[$C._allowClaimReward_] = 0;
         //config[$C._reward_         ] = 2;
         //_set(_reward_,        1, 0.10e18);
         //_set(_reward_,        2, 0.05e18);
         config[$C._lockSpanReward_  ] = 100 days;
         config[$C._ecoAddr_         ] = uint(msg.sender);
         config[$C._ecoRatio_        ] = 0.10e18;
+        config[$C._denyDonate_      ] = 1;
 
         setBuf($, 100_000e18 * 5 * 100e18 / 0.01e18, 100e18, 0.01e18);
     }
